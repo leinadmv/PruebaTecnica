@@ -18,8 +18,10 @@ export class CrearUsuarioComponent implements OnInit {
   ngOnInit(): void {
     this.formControl();
 
-    this.setData(this.data.data);
-
+    if(this.data.data){
+      this.setData(this.data.data);
+    }
+    
   }
 
 
