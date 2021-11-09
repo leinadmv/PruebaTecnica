@@ -1,0 +1,30 @@
+<div class="example-button-container">
+    <button mat-fab color="primary" (click)="crearUsuario()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+
+  <div class="container p-3">
+    <div>
+        <h2>Filtros</h2>
+        <div fxLayout="row">
+            <mat-form-field class="me-4">
+                <mat-label>Email</mat-label>
+                <input matInput [(ngModel)]="filtroEmail" (blur)="filtro()">
+            </mat-form-field>
+            <mat-form-field class="me-4">
+                <mat-label>Usuario</mat-label>
+                <input matInput [(ngModel)]="filtroUsuario" (blur)="filtro()">
+            </mat-form-field>
+            <mat-form-field class="me-4">
+                <mat-label>Nombres</mat-label>
+                <input matInput [(ngModel)]="filtroNombres" (blur)="filtro()">
+            </mat-form-field>
+            <mat-form-field class="me-4">
+                <mat-label>Apellidos</mat-label>
+                <input matInput [(ngModel)]="filtroApellidos" (blur)="filtro()">
+            </mat-form-field>
+        </div>
+    </div>
+    <app-tabla-datos [dataSource]="datosTabla"></app-tabla-datos>
+</div>
