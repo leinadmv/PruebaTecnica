@@ -1,5 +1,8 @@
-import { Component, Input,  OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input,  OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { ConsultaService } from 'src/app/services/consulta.service';
 import { CrearUsuarioComponent } from '../../crear-usuario/crear-usuario.component';
 
 @Component({
@@ -7,24 +10,23 @@ import { CrearUsuarioComponent } from '../../crear-usuario/crear-usuario.compone
   templateUrl: './tabla-datos.component.html',
   styleUrls: ['./tabla-datos.component.scss']
 })
-export class TablaDatosComponent implements OnInit {
+export class TablaDatosComponent implements OnInit, AfterViewInit {
 
-  @Input() dataSource = [];
+  dataSource = new MatTableDataSource();
   displayedColumns:string[] = ['usuario','email','nombres','apellidos','activo','acciones'];
-  length: any;
-  pageSize = 5;
-  page = 1;
-  pageSizeOptions = [5,10,25,50,100];
-
-  constructor(private dialog:MatDialog) { }
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  
+  constructor(private dialog:MatDialog, private consultaService: ConsultaService) { }
+  
+  ngAfterViewInit(){
+    this.dataSource.paginator = this.paginator;
+    this.paginator._intl.itemsPerPageLabel="Registros por página";
+  }
 
   ngOnInit(): void {
+    this.dataSource.data = this.consultaService.get();
   }
 
-  pageEvent(event:any){
-    this.pageSize = event.pageSize;
-    this.page = event.pageIndex + 1;
-  }
 
   editar(dato: any){
 
@@ -52,6 +54,11 @@ export class TablaDatosComponent implements OnInit {
       panelClass: 'custom-dialog-container',
     });
 
+  }
+
+  filtro(event: Event){
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
 }

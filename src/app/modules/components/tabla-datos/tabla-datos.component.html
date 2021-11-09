@@ -1,53 +1,70 @@
-<div class="mat-elevation-z0 mt-4" fxFlex="100%">
-    <table  [dataSource]="dataSource" mat-table  matSort>
-
-
-      <ng-container matColumnDef="usuario">
-        <th mat-header-cell *matHeaderCellDef> Usuario </th>
-        <td mat-cell *matCellDef="let element"> {{ element.usuario }} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="email">
-        <th mat-header-cell *matHeaderCellDef> Email </th>
-        <td mat-cell *matCellDef="let element"> {{ element.email }} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="nombres">
-        <th mat-header-cell *matHeaderCellDef> Nombres </th>
-        <td mat-cell *matCellDef="let element"> {{ element.nombres }} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="apellidos">
-        <th mat-header-cell *matHeaderCellDef> Apellidos </th>
-        <td mat-cell *matCellDef="let element"> {{ element.apellidos}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="activo">
-        <th mat-header-cell *matHeaderCellDef> Activo </th>
-        <td mat-cell *matCellDef="let element"> {{ element.activo }} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="acciones">
-        <th mat-header-cell *matHeaderCellDef> Acciones </th>
-        <td mat-cell *matCellDef="let element">
-        <button mat-fab color="primary" (click)="editar(element)"><mat-icon>edit</mat-icon></button>
-        <button mat-fab color="primary" (click)="ver(element)"><mat-icon>search</mat-icon></button>
-        </td>
-      </ng-container>
-      
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-      <tr class="mat-row" *matNoDataRow>
-        <td class="mat-cell" colspan="4">No hay registros para mostrar</td>
-      </tr>
-    </table>
-
+<div fxLayout="column">
+    <div>
+        <h2>Filtros</h2>
+        <div fxLayout="row">
+            <mat-form-field class="me-4">
+                <mat-label>Email</mat-label>
+                <input matInput (blur)="filtro($event)">
+            </mat-form-field>
+            <mat-form-field class="me-4">
+                <mat-label>Usuario</mat-label>
+                <input matInput (blur)="filtro($event)">
+            </mat-form-field>
+            <mat-form-field class="me-4">
+                <mat-label>Nombres</mat-label>
+                <input matInput (blur)="filtro($event)">
+            </mat-form-field>
+            <mat-form-field class="me-4">
+                <mat-label>Apellidos</mat-label>
+                <input matInput (blur)="filtro($event)">
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="mat-elevation-z0 mt-4" fxFlex="100%">
+        <table  [dataSource]="dataSource" mat-table  matSort>
     
-    <mat-paginator [length]="length"
-    [pageSize]="pageSize"
-    (page) ="pageEvent($event)"
-    [pageSizeOptions] = "pageSizeOptions"
-    >
-  </mat-paginator>
+          <ng-container matColumnDef="usuario">
+            <th mat-header-cell *matHeaderCellDef> Usuario </th>
+            <td mat-cell *matCellDef="let element"> {{ element.usuario }} </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef> Email </th>
+            <td mat-cell *matCellDef="let element"> {{ element.email }} </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="nombres">
+            <th mat-header-cell *matHeaderCellDef> Nombres </th>
+            <td mat-cell *matCellDef="let element"> {{ element.nombres }} </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="apellidos">
+            <th mat-header-cell *matHeaderCellDef> Apellidos </th>
+            <td mat-cell *matCellDef="let element"> {{ element.apellidos}} </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="activo">
+            <th mat-header-cell *matHeaderCellDef> Activo? </th>
+            <td mat-cell *matCellDef="let element"> {{ element.activo }} </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef> Acciones </th>
+            <td mat-cell *matCellDef="let element">
+            <button mat-fab color="primary" (click)="editar(element)"><mat-icon>edit</mat-icon></button>
+            <button mat-fab color="primary" (click)="ver(element)"><mat-icon>search</mat-icon></button>
+            </td>
+          </ng-container>
+          
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">No hay registros para mostrar</td>
+          </tr>
+        </table>
+    
+        
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
 </div>

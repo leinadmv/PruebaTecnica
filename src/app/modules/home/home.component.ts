@@ -11,15 +11,6 @@ import { CrearUsuarioComponent } from '../crear-usuario/crear-usuario.component'
 })
 export class HomeComponent implements OnInit {
 
-  datosTabla = [
-    {usuario:'user_prueba',email:'correo@prueba.com',nombres:'Prueba',apellidos:'Tecnica',activo:'activo'}
-  ];
-
-  //Filtros
-  filtroEmail:string = '';
-  filtroUsuario:string = '';
-  filtroNombres:string = '';
-  filtroApellidos:string = '';
 
   constructor(consulta : ConsultaService, public dialog: MatDialog) { }
 
