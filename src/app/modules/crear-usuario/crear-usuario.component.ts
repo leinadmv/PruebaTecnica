@@ -29,7 +29,7 @@ export class CrearUsuarioComponent implements OnInit {
       nombre: new FormControl('', [Validators.required, Validators.maxLength(100), Validators.minLength(3)]),
       apellido: new FormControl('', [Validators.required]),
       email: new FormControl('', [ Validators.email, Validators.required]),
-      usuario: new FormControl('', [ Validators.maxLength(20), Validators.required, Validators.pattern('^[a-z,A-Z]/w')]),
+      usuario: new FormControl('', [ Validators.maxLength(20), Validators.required, Validators.pattern('^[a-zA-Z]+$')]),
       estado: new FormControl('', [ Validators.required]),
     });
 
